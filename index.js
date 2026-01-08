@@ -249,6 +249,7 @@ const getTextForTextPlayerName = (playerName) => {
         display: flex;
         margin-top: 5px;
         margin-bottom: 5px;
+        align-items: center;
       "
     >
       <input
@@ -258,19 +259,27 @@ const getTextForTextPlayerName = (playerName) => {
         style="
           background-color: #e8e6e3;
           font-family: 'Comic Sans MS', sans-serif;
+          padding: 0px;
+          margin: 0px;
           margin-right: 5px;
+          height: 30px;
         "
       />
-      <button
+      <div
         onclick="removeTextPlayerName(this)"
         style="
+          display: flex;
           background-color: #e8e6e3;
+          font-family: sans-serif;
           font-weight: bold;
-          margin-right: 5px;
+          height: 30px;
+          width: 30px;
+          justify-content: center;
+          align-items: center;
         "
       >
-        X
-      </button>
+        <p>x</p>
+      </div>
     </ div>
   `;
 };
