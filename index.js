@@ -263,8 +263,13 @@ const getTextForTextPlayerName = (playerName) => {
       />
       <button
         onclick="removeTextPlayerName(this)"
+        style="
+          background-color: #e8e6e3;
+          font-weight: bold;
+          margin-right: 5px;
+        "
       >
-        ✗
+        X
       </button>
     </ div>
   `;
