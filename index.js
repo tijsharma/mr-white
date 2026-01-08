@@ -260,7 +260,8 @@ const getTextForTextPlayerName = (playerName) => {
           background-color: #e8e6e3;
           font-family: 'Comic Sans MS', sans-serif;
           padding: 0px;
-          margin: 0px;
+          padding-left: 5px;
+          padding-right: 5px;
           margin-right: 5px;
           height: 30px;
         "
