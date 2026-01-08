@@ -244,15 +244,21 @@ const getTextForTextPlayerName = (playerName) => {
   playerName = playerName ? playerName : '""';
 
   return `
+    <div style=
+      "
+        display: flex;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      "
+    >
       <input
         type="text"
         class="text-player-name"
         value="${playerName}"
         style="
           background-color: #e8e6e3;
-          font-family: 'Comic Sans MS', cursive, sans-serif;
-          margin-top: 5px;
-          margin-bottom: 5px;
+          font-family: 'Comic Sans MS', sans-serif;
+          margin-right: 5px;
         "
       />
       <button
@@ -260,6 +266,7 @@ const getTextForTextPlayerName = (playerName) => {
       >
         ✗
       </button>
+    </ div>
   `;
 };
 
@@ -295,7 +302,7 @@ const getTextForBtnPlayerWord = (playerName) => {
       class="btn_player_word"
       onclick="revealPlayerWord(this.textContent.trim())"
       style="
-        font-family: 'Comic Sans MS', cursive, sans-serif;
+        font-family: 'Comic Sans MS', sans-serif;
         padding-top: 3px;
         padding-bottom: 3px;
         padding-left: 7px;
