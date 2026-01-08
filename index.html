@@ -6,6 +6,12 @@
   </head>
 
   <style>
+    html {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .container {
       display: flex;
       flex-direction: column;
@@ -14,11 +20,11 @@
   </style>
 
   <body>
-    <div id="lobby" class="container">
+    <div id="lobby" class="container" style="width: fit-content">
       <h1 id="header" style="color: #e8e6e3; text-justify: center">
         Mr. White
       </h1>
-      <div id="div_text_player_names" class="item-container"></div>
+      <div id="div_text_player_names"></div>
       <div style="padding: 15px">
         <button id="btn_add_player" style="padding: 15px">Add player</button>
         <button id="btn_start_game" style="padding: 15px">Start round</button>
@@ -38,7 +44,11 @@
         Click on your name to reveal your word
       </h1>
 
-      <div id="div_player_buttons_with_words" class="container"></div>
+      <div
+        id="div_player_buttons_with_words"
+        class="container"
+        style="width: fit-content"
+      ></div>
       <button
         id="btn_reset_back_to_lobby"
         style="
