@@ -353,13 +353,45 @@ const getUndercoverAndCivillianWords = () => {
   return roleWords;
 };
 
+const pickRandomItemFromList = (list) => {
+  const randIndex = getRandInt(list.length);
+  return list[randIndex];
+};
+
+const startListAtNewIndex = (list, newStartIndex) => {
+  // Creates a new list that maintains existing ordering but starts list at new index
+  let i = newStartIndex;
+  let newList = [];
+
+  while (true) {
+    newList.push(list[i]);
+    i += 1;
+    if (i >= list.length) {
+      i = 0;
+    }
+    if (i === newStartIndex) {
+      return newList;
+    }
+  }
+};
+
+const createPlayerTurnList = (civillians) => {
+  // Create a turn order to start with a random civillian
+  let randomCivillian = pickRandomItemFromList(civillians);
+  const playerList = JSON.parse(localStorage.getItem("player_list"));
+
+  const playerTurnList = startListAtNewIndex(
+    playerList,
+    playerList.indexOf(randomCivillian)
+  );
+
+  sessionStorage.setItem("player_turn_list", JSON.stringify(playerTurnList));
+};
+
 const assignWordsBasedOnRoleCounts = (roleCounts, roleWords) => {
   const playerList = JSON.parse(localStorage.getItem("player_list"));
 
   let playerWords = {};
-  for (let playerName of playerList) {
-    playerWords[playerName] = null;
-  }
 
   let unassignedPlayerList = playerList.slice();
 
@@ -377,12 +409,15 @@ const assignWordsBasedOnRoleCounts = (roleCounts, roleWords) => {
   }
 
   for (let playerName of playerList) {
-    if (playerWords[playerName] === null) {
+    if (playerWords[playerName] === undefined) {
       playerWords[playerName] = roleWords.civillian;
     }
   }
 
   sessionStorage.setItem("player_words", JSON.stringify(playerWords));
+
+  const civillians = unassignedPlayerList;
+  createPlayerTurnList(civillians);
 };
 
 const assignWordsBasedOnPlayerCount = (roleWords) => {
@@ -405,15 +440,18 @@ const assignWordsBasedOnPlayerCount = (roleWords) => {
   }
 };
 
-const setPlayerWords = () => {
+const setPlayerWordsAndTurns = () => {
   const roleWords = getUndercoverAndCivillianWords();
   assignWordsBasedOnPlayerCount(roleWords);
 };
 
 const renderPlayerWords = () => {
-  let playerList = JSON.parse(localStorage.getItem("player_list") || "[]");
+  let playerTurnList = JSON.parse(
+    sessionStorage.getItem("player_turn_list") || "[]"
+  );
+
   document.getElementById("div_player_buttons_with_words").innerHTML = ""; // empty the div
-  for (let name of playerList) {
+  for (let name of playerTurnList) {
     let newElement = document.createElement("div");
     newElement.innerHTML = getTextForBtnPlayerWord(name);
     document
@@ -443,7 +481,7 @@ const startRound = () => {
   }
 
   sessionStorage.setItem("game_state", GameState.IN_ROUND);
-  setPlayerWords();
+  setPlayerWordsAndTurns();
   renderPlayerWords();
   renderPage();
 };
